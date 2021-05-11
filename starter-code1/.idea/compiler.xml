@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="adserver-service" />
+        <module name="tasker-config-server" />
+        <module name="tasker-eureka-server" />
+        <module name="tasker-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="adserver-service" target="1.5" />
+      <module name="tasker-config-server" target="1.5" />
+      <module name="tasker-eureka-server" target="1.5" />
+      <module name="tasker-service" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

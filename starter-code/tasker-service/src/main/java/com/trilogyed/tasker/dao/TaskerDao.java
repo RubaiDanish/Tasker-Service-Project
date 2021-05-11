@@ -1,6 +1,7 @@
 package com.trilogyed.tasker.dao;
 
 import com.trilogyed.tasker.model.Task;
+import com.trilogyed.tasker.model.TaskViewModel;
 
 import java.util.List;
 

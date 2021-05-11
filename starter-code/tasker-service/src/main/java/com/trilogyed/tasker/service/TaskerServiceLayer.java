@@ -20,12 +20,10 @@ public class TaskerServiceLayer {
     AdserverService client;
 
     @Autowired
-    public TaskerServiceLayer (TaskerDao dao,  TaskViewModel tvm, AdserverService client) {
+    public TaskerServiceLayer (TaskerDao dao, AdserverService client) {
         this.dao = dao;
-        this.tvm = tvm;
         this.client = client;
     }
-
     public TaskViewModel fetchTask(int id) {
 
         Task task = dao.getTask(id);
@@ -36,7 +34,7 @@ public class TaskerServiceLayer {
         tvm.setCreateDate(task.getCreateDate());
         tvm.setDueDate(task.getDueDate());
         tvm.setCategory(task.getCategory());
-        tvm.setAdvertisement(client.getAdvertisementForTask(tvm.getAdvertisement()));
+        tvm.setAdvertisement(client.getAd());
 
         return tvm;
     }
@@ -48,6 +46,7 @@ public class TaskerServiceLayer {
         tvm.setCreateDate(task.getCreateDate());
         tvm.setDueDate(task.getDueDate());
         tvm.setCategory(task.getCategory());
+        tvm.setAdvertisement(client.getAd());
 
         return tvm;
     }
@@ -56,6 +55,7 @@ public class TaskerServiceLayer {
         List<Task> taskList = dao.getAllTasks();
         List<TaskViewModel> returnVal = new ArrayList<>();
         for (Task t: taskList) {
+            TaskViewModel tvm = buildTaskViewModel(t);
             returnVal.add(buildTaskViewModel(t));
         }
         return returnVal;
@@ -81,12 +81,19 @@ public class TaskerServiceLayer {
 
         task = dao.createTask(task);
         taskViewModel.setId(task.getId());
-        String ad = client.getAdvertisementForTask(tvm.getAdvertisement());
+        taskViewModel.setAdvertisement(client.getAd());
 
         return taskViewModel;
     }
 
-    public void updateTask(Task task) {
+    public void updateTask(TaskViewModel taskViewModel) {
+        Task task = new Task();
+            task.setId(taskViewModel.getId());
+            task.setDescription(taskViewModel.getDescription());
+            task.setCreateDate(taskViewModel.getCreateDate());
+            task.setDueDate(taskViewModel.getDueDate());
+            task.setCategory(taskViewModel.getCategory());
+
         dao.updateTask(task);
     }
 

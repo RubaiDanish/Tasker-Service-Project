@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class TaskerController {
     //Create new task
     @RequestMapping(value = "/tasks", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public TaskViewModel createTask(@RequestBody TaskViewModel task) {
+    public TaskViewModel createTask(@Valid @RequestBody TaskViewModel task) {
 
         return service.newTask(task);
     }
@@ -54,9 +55,9 @@ public class TaskerController {
     //Update task
     @RequestMapping(value = "/tasks", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTask(@PathVariable int id, @RequestBody Task task) {
+    public void updateTask(@Valid @PathVariable int id, @RequestBody TaskViewModel taskViewModel) {
 
-        service.updateTask(task);
+        service.updateTask(taskViewModel);
     }
 
     //Delete task
